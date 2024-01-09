@@ -21,34 +21,41 @@ function confirmTool () {
 
 echo "This script will attempt to install all needed dependencies for a Aleksander Długosz compliant environment."
 echo "Each step will require a confirmation."
+echo "By default, the folliwng will be installed:"
+echo "  - xcode command line tools"
+echo "  - homebrew"
+echo "  - fish shell"
 echo
 continueConsent
 
-if confirmTool "xcode command line tools"
-then
-    xcode-select --install
-fi
 
-if confirmTool "homebrew"
-then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile  
-    eval "$(/usr/local/bin/brew shellenv)"
-fi
+echo "Installing command line tools..."
+xcode-select --install
 
-if confirmTool "fish shell" "and set it as the default shell"
+
+echo "Installing homebrew..."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile  
+eval "$(/usr/local/bin/brew shellenv)"
+echo " "
+
+
+echo "Installing fish..."
+brew install fish
+echo /usr/local/bin/fish | sudo tee -a /etc/shells
+ditto ./fish ~/.config/fish/
+if confirmTool "fish shell as the default shell"
 then
-    brew install fish
-    echo /usr/local/bin/fish | sudo tee -a /etc/shells
     chsh -s /usr/local/bin/fish
-    ditto ./fish ~/.config/fish/
 fi
+
 
 if confirmTool "visual studio code"
 then
     brew install --cask visual-studio-code
     echo "Use the \"code [file/dir]\" command to run visual studio code on the given file / directory."
 fi
+
 
 if confirmTool "node version manager, node & fish bass"
 then
@@ -70,16 +77,19 @@ then
     echo "Use the command \"nvm\" to run the node version manager and list all possible arguments."
 fi
 
+
 if confirmTool "maven"
 then
     brew install maven
 fi
+
 
 if confirmTool "ssh key" "in the ~/.ssh/ directory"
 then
     ssh-keygen -t rsa
     echo "Use the following command to copy your ssh key: \"pbcopy < ~/.ssh/id_rsa.pub\""
 fi
+
 
 if confirmTool "docker"
 then
@@ -93,14 +103,17 @@ then
     docker run hello-world
 fi
 
+
 if confirmTool "spotify" "to play some music while you code"
 then
     brew install --cask spotify
 fi
 
+
 if confirmTool "1password" "to manage your passwords in the command line"
 then
     brew install 1password-cli
 fi
+
 
 echo "Please restart your shell session now."
