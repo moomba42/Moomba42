@@ -98,4 +98,9 @@ then
     brew install --cask spotify
 fi
 
+if confirmTool "1password" "to manage your passwords in the command line"
+then
+    brew install 1password-cli
+fi
+
 echo "Please restart your shell session now."
