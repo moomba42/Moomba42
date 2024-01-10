@@ -13,6 +13,21 @@ A good online list of cheatsheets can be found here: https://cheatography.com/
 - `docker container port NAME_OR_HASH` - show the opened ports of the given container
 - `kubectl` cheatsheet - https://kubernetes.io/docs/reference/kubectl/quick-reference/
 
+### Direct resource manipulation
+- `kubectl delete [resource] [identifier]`
+- `kubectl describe [resource] [identifier]` - status of the given resource in human readable format
+- `kubectl get [resource] [identifier] -o yaml` - output given resource definition in yaml format 
+- `kubectl get events --watch-only` - listen for new events across the whole cluster
+- `kubectl create deployment [deployment-name] --image [docker-image-identifier]` - create a new deployment
+
+### Logs
+- `stern [pod-query]` - get the logs of all containers in a given pod, in a nice format (**best option**)
+- `kubectl logs [resource]/[identifier]` - get the logs of a pod that is implied by a given resource
+- `kubectl logs [pod-identifier] --follow --tail 1` - get the last log line of the specified pod and then listen for new logs
+- `kubectl logs [pod-identifier] -c [container-name] --follow --tail 1` - get the last log line of the specified pod container and then listen for new logs
+- `kubectl logs [pod-identifier] --all-containers=true` - get the logs of all containers in the given pod, not just the first one
+- `kubectl logs -l [label]` - get the logs for a given label (look for labels using kubectl describe)
+
 ## GIT
 - `git log --graph --oneline --all` - show git tree
 - `git show -s --format='%ae' HASH` - show commit author

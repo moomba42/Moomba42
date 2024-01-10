@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function continueConsent () {
-    read -p "Do you want to continue? y/n: " -n 1 -r
+    read -p "🔹 Do you want to continue? y/n: " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]
     then
@@ -10,7 +10,7 @@ function continueConsent () {
 }
 
 function confirmTool () {
-    read -p "Do you want to install [$1] $2? y/n: " -n 1 -r
+    read -p "🔹 Do you want to install [$1] $2? y/n: " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
@@ -19,7 +19,7 @@ function confirmTool () {
     return 1
 }
 
-echo "This script will attempt to install all needed dependencies for a Aleksander Długosz compliant environment."
+echo "🧑👉 This script will attempt to install all needed dependencies for an ✨Aleksander Długosz✨-compliant environment."
 echo "Each step will require a confirmation."
 echo "By default, the folliwng will be installed:"
 echo "  - xcode command line tools"
@@ -28,22 +28,38 @@ echo "  - fish shell"
 echo
 continueConsent
 
+if ! command -v git &> /dev/null
+then
+    echo "🔸 git command could not be found"
+    echo "✨ Installing command line tools..."
+    xcode-select --install
+fi
 
-echo "Installing command line tools..."
-xcode-select --install
+if ! command -v brew &> /dev/null
+then
+    echo "🔸 brew command could not be found"
+    echo "✨ Installing homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile  
+    eval "$(/usr/local/bin/brew shellenv)"
+    echo " "
+fi
 
+if ! command -v watch &> /dev/null
+then
+    echo "🔸 watch command could not be found"
+    echo "✨ Installing watch..."
+    brew install watch
+fi
 
-echo "Installing homebrew..."
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile  
-eval "$(/usr/local/bin/brew shellenv)"
-echo " "
-
-
-echo "Installing fish..."
-brew install fish
-echo /usr/local/bin/fish | sudo tee -a /etc/shells
-ditto ./fish ~/.config/fish/
+if ! command -v fish &> /dev/null
+then
+    echo "🔸 fish command could not be found"
+    echo "✨ Installing fish..."
+    brew install fish
+    echo /usr/local/bin/fish | sudo tee -a /etc/shells
+    ditto ./fish ~/.config/fish/
+fi
 if confirmTool "fish shell as the default shell"
 then
     chsh -s /usr/local/bin/fish
@@ -54,6 +70,12 @@ if confirmTool "visual studio code"
 then
     brew install --cask visual-studio-code
     echo "Use the \"code [file/dir]\" command to run visual studio code on the given file / directory."
+fi
+
+
+if confirmTool "jetbrains toolbox"
+then
+    brew install --cask jetbrains-toolbox
 fi
 
 
@@ -91,12 +113,13 @@ then
 fi
 
 
-if confirmTool "docker"
+if confirmTool "docker + k8s"
 then
     brew install docker
     brew install docker-compose
     brew install hyperkit
     brew install minikube
+    brew install stern
     minikube start
     eval $(minikube docker-env)
     echo "$(minikube ip) docker.local" | sudo tee -a /etc/hosts > /dev/null
@@ -114,6 +137,5 @@ if confirmTool "1password" "to manage your passwords in the command line"
 then
     brew install 1password-cli
 fi
-
 
 echo "Please restart your shell session now."
