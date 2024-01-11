@@ -136,6 +136,7 @@ fi
 if confirmTool "linearmouse" "to disable built-in macos mouse acceleration"
 then
     brew install --cask linearmouse
+    ditto ./linearmouse ~/.config/linearmouse/
 fi
 
 
