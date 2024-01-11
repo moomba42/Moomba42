@@ -145,4 +145,33 @@ then
     brew install 1password-cli
 fi
 
+
+if confirmTool "obsidian" "to manage your notes in markdown format"
+then
+    brew install --cask obsidian
+fi
+
+if confirmTool "discord" "to talk with others"
+then
+    brew install --cask discord
+fi
+
+
+if confirmTool "slack" "to talk with others"
+then
+    brew install --cask slack
+fi
+
+
+if confirmTool "figma" "to design graphics and UI"
+then
+    brew install --cask figma
+fi
+
+
+if confirmTool "jetbrains-toolbox" "to manage jetbrains products"
+then
+    brew install --cask jetbrains-toolbox
+fi
+
 echo "Please restart your shell session now."
