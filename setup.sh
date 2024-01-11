@@ -133,6 +133,12 @@ then
 fi
 
 
+if confirmTool "linearmouse" "to disable built-in macos mouse acceleration"
+then
+    brew install --cask linearmouse
+fi
+
+
 if confirmTool "1password" "to manage your passwords in the command line"
 then
     brew install 1password-cli
