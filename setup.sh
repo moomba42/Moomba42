@@ -40,8 +40,12 @@ then
     echo "🔸 brew command could not be found"
     echo "✨ Installing homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile  
-    eval "$(/usr/local/bin/brew shellenv)"
+    # M1
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile  
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    # Intel
+    # (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile  
+    # eval "$(/usr/local/bin/brew shellenv)"
     echo " "
 fi
 
@@ -57,12 +61,19 @@ then
     echo "🔸 fish command could not be found"
     echo "✨ Installing fish..."
     brew install fish
-    echo /usr/local/bin/fish | sudo tee -a /etc/shells
+    # M1
+    echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+    # Intel
+    # echo /usr/local/bin/fish | sudo tee -a /etc/shells
     ditto ./fish ~/.config/fish/
+    (echo "SETUVAR fish_user_paths:/opt/homebrew/bin") >> ~/.config/fish/fish_variables # For M1
 fi
 if confirmTool "fish shell as the default shell"
 then
-    chsh -s /usr/local/bin/fish
+    # M1
+    chsh -s /opt/homebrew/bin/fish
+    # Intel
+    # chsh -s /usr/local/bin/fish
 fi
 
 
@@ -90,9 +101,17 @@ then
     mkdir ~/.nvm
     touch ~/.zshrc
     touch ~/.zshenv
-    echo "export NVM_DIR=\"\$HOME/.nvm\"" >> ~/.zshenv
-    echo "[ -s \"/usr/local/opt/nvm/nvm.sh\" ] && \. \"/usr/local/opt/nvm/nvm.sh\"  # This loads nvm" >> ~/.zshrc
-    echo "[ -s \"/usr/local/opt/nvm/etc/bash_completion.d/nvm\" ] && \. \"/usr/local/opt/nvm/etc/bash_completion.d/nvm\"  # This loads nvm bash_completion" >> ~/.
+
+    # M1
+    echo "export NVM_DIR=\"\$HOME/.nvm\"" >> ~/.zshrc
+    echo "[ -s \"/opt/homebrew/opt/nvm/nvm.sh\" ] && \. \"/opt/homebrew/opt/nvm/nvm.sh\"  # This loads nvm" >> ~/.zshrc
+    echo "[ -s \"/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm\" ] && \. \"/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm\"  # This loads nvm bash_completion" >> ~/.zshrc
+
+    # Intel
+    # echo "export NVM_DIR=\"\$HOME/.nvm\"" >> ~/.zshrc
+    # echo "[ -s \"/usr/local/opt/nvm/nvm.sh\" ] && \. \"/usr/local/opt/nvm/nvm.sh\"  # This loads nvm" >> ~/.zshrc
+    # echo "[ -s \"/usr/local/opt/nvm/etc/bash_completion.d/nvm\" ] && \. \"/usr/local/opt/nvm/etc/bash_completion.d/nvm\"  # This loads nvm bash_completion" >> ~/.zshrc
+
     source ~/.zshenv
     source ~/.zshrc
     nvm install --lts
@@ -117,12 +136,27 @@ if confirmTool "docker + k8s"
 then
     brew install docker
     brew install docker-compose
-    brew install hyperkit
-    brew install minikube
     brew install stern
+
+    # M1
+    brew install colima
+    colima start -m 4 # start colima with 4 gigabytes of ram
+    # `colima template` -> edit the startup template and change the amount of memory to 4 gigabytes, then :wq to save , and now you can just write `colima start`
+    # Intel
+    # brew install hyperkit 
+
+    brew install minikube
+    minikube config set driver docker
     minikube start
+
     eval $(minikube docker-env)
     echo "$(minikube ip) docker.local" | sudo tee -a /etc/hosts > /dev/null
+    
+    # M1
+    # Compose is now a Docker plugin. For Docker to find this plugin, symlink it:
+    mkdir -p ~/.docker/cli-plugins
+    ln -sfn /opt/homebrew/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+
     docker run hello-world
 fi
 
@@ -172,6 +206,13 @@ fi
 if confirmTool "jetbrains-toolbox" "to manage jetbrains products"
 then
     brew install --cask jetbrains-toolbox
+fi
+
+
+if confirmTool "the silver searcher" "to quickly search files"
+then
+    brew install the_silver_searcher
+    echo "Use the following command to search your files: \"ag [text] [path]\""
 fi
 
 echo "Please restart your shell session now."

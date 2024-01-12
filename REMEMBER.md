@@ -35,3 +35,4 @@ A good online list of cheatsheets can be found here: https://cheatography.com/
 
 ## Other
 - `cat ~/.ssh/id_rsa.pub | pbcopy` - copy public rsa to clipboard
+- `ag -i -g 'filename' ~/some/directory` - search all files in a given directory containing the pattern "filename" in their file name, case insensitively
