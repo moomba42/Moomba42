@@ -76,6 +76,11 @@ then
     # chsh -s /usr/local/bin/fish
 fi
 
+if confirmTool "Amazon Corretto OpenJDK"
+then
+    brew tap homebrew/cask-versions
+    brew install --cask corretto17
+fi
 
 if confirmTool "visual studio code"
 then

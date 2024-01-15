@@ -28,6 +28,9 @@ A good online list of cheatsheets can be found here: https://cheatography.com/
 - `kubectl logs [pod-identifier] --all-containers=true` - get the logs of all containers in the given pod, not just the first one
 - `kubectl logs -l [label]` - get the logs for a given label (look for labels using kubectl describe)
 
+### Others
+- `kubectl explain [resourcetype]` - Show the documentation on how a certain resource type is built
+
 ## GIT
 - `git log --graph --oneline --all` - show git tree
 - `git show -s --format='%ae' HASH` - show commit author
