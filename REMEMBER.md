@@ -3,8 +3,10 @@ A list of commands / things that i use rarely but when i do i need to remember h
 A good online list of cheatsheets can be found here: https://cheatography.com/
 
 ## Docker / k8s
-- `minikube start` - start the BM and k8s cluster
-- `minikube stop` - stop the VM and k8s cluster
+- `colima start` - start the colima VM (Apple Silicon)
+- `colima stop` - stop the VM (Apple Silicon)
+- `minikube start` - start k8s cluster (and VM if using hyperkit)
+- `minikube stop` - stop k8s cluster (and VM if using hyperkit)
 - `minikube delete` - Delete the cluster with all the data. All volumes will be lost.
 - `minikube ip` - IP address of the VM where the cluster and docker engine run.
 - `minikube pause` - pause k8s related containers so that they dont consume system resources
@@ -34,8 +36,9 @@ A good online list of cheatsheets can be found here: https://cheatography.com/
 ## GIT
 - `git log --graph --oneline --all` - show git tree
 - `git show -s --format='%ae' HASH` - show commit author
-- `git rebase -i HEAD~3` - rebase onto the 3rd last commit interactively (allowing you to f.ex. squash the commits)
+- `git rebase -i HEAD~3` - rebase onto the 3rd last commit interactively(whatever commit was last comitted, and two before it, inclusively), allowing you to f.ex. squash the commits.
 
 ## Other
 - `cat ~/.ssh/id_rsa.pub | pbcopy` - copy public rsa to clipboard
 - `ag -i -g 'filename' ~/some/directory` - search all files in a given directory containing the pattern "filename" in their file name, case insensitively
+- `minikube ssh grep host.minikube.internal /etc/hosts | cut -f1` - prints out the internal host ip that is used to access host resources from within minikube pods. 
