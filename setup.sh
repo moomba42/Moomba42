@@ -76,6 +76,11 @@ then
     # chsh -s /usr/local/bin/fish
 fi
 
+if confirmTool "Amazon Corretto OpenJDK"
+then
+    brew tap homebrew/cask-versions
+    brew install --cask corretto17
+fi
 
 if confirmTool "visual studio code"
 then
@@ -156,8 +161,17 @@ then
     # Compose is now a Docker plugin. For Docker to find this plugin, symlink it:
     mkdir -p ~/.docker/cli-plugins
     ln -sfn /opt/homebrew/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+    # Intel
+    # mkdir -p ~/.docker/cli-plugins
+    # ln -sfn /usr/local/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
 
     docker run hello-world
+
+
+    brew install docker-credential-helper
+    brew install jq
+    touch ~/.docker/config.json
+    jq '. += {credsStore: "osxkeychain"}' ~/.docker/config.json > ~/.docker/config.json.tmp && mv ~/.docker/config.json.tmp ~/.docker/config.json
 fi
 
 
@@ -213,6 +227,11 @@ if confirmTool "the silver searcher" "to quickly search files"
 then
     brew install the_silver_searcher
     echo "Use the following command to search your files: \"ag [text] [path]\""
+fi
+
+if confirmTool "AWS cli" "to interface with AWS services"
+then
+    brew install awscli
 fi
 
 ## Better display: https://github.com/waydabber/BetterDisplay
