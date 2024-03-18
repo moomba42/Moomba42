@@ -1,3 +1,7 @@
+if type -q nvm
+    nvm use default --silent
+end
+
 if type -q minikube
     eval $(minikube docker-env)
 end

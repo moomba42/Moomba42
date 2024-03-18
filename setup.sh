@@ -215,4 +215,6 @@ then
     echo "Use the following command to search your files: \"ag [text] [path]\""
 fi
 
+## Better display: https://github.com/waydabber/BetterDisplay
+
 echo "Please restart your shell session now."
