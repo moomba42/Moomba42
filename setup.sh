@@ -234,6 +234,11 @@ then
     brew install awscli
 fi
 
+if confirmTool "Ngrok" "to expose local services to the internet"
+then
+    brew install ngrok/ngrok/ngrok
+fi
+
 ## Better display: https://github.com/waydabber/BetterDisplay
 
 echo "Please restart your shell session now."
