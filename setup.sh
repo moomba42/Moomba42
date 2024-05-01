@@ -174,6 +174,11 @@ then
     jq '. += {credsStore: "osxkeychain"}' ~/.docker/config.json > ~/.docker/config.json.tmp && mv ~/.docker/config.json.tmp ~/.docker/config.json
 fi
 
+if confirmTool "flutter" "to develop cross-platform apps"
+then
+    brew install --cask flutter
+fi
+
 
 if confirmTool "spotify" "to play some music while you code"
 then
