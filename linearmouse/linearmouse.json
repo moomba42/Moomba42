@@ -1,0 +1,21 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.9.5",
+  "schemes" : [
+    {
+      "pointer" : {
+        "acceleration" : 0,
+        "speed" : 0.2519,
+        "disableAcceleration" : false
+      },
+      "if" : {
+        "device" : {
+          "productName" : "MX Vertical",
+          "category" : "mouse"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : 1
+      }
+    }
+  ]
+}
