@@ -19,7 +19,7 @@ function confirmTool () {
     return 1
 }
 
-echo "🧑👉 This script will attempt to install all needed dependencies for an ✨Aleksander Długosz✨-compliant environment."
+echo "🧑👉 This script will attempt to install all needed dependencies for an alexdl-compliant environment."
 echo "Each step will require a confirmation."
 echo "By default, the folliwng will be installed:"
 echo "  - xcode command line tools"
@@ -66,7 +66,6 @@ then
     # Intel
     # echo /usr/local/bin/fish | sudo tee -a /etc/shells
     ditto ./fish ~/.config/fish/
-    (echo "SETUVAR fish_user_paths:/opt/homebrew/bin") >> ~/.config/fish/fish_variables # For M1
 fi
 if confirmTool "fish shell as the default shell"
 then
@@ -189,7 +188,7 @@ fi
 if confirmTool "linearmouse" "to disable built-in macos mouse acceleration"
 then
     brew install --cask linearmouse
-    ditto ./linearmouse ~/.config/linearmouse/
+    ditto ./linearmouse.json ~/.config/linearmouse/linearmouse.json
 fi
 
 
@@ -203,6 +202,7 @@ if confirmTool "obsidian" "to manage your notes in markdown format"
 then
     brew install --cask obsidian
 fi
+
 
 if confirmTool "discord" "to talk with others"
 then
@@ -234,10 +234,6 @@ then
     echo "Use the following command to search your files: \"ag [text] [path]\""
 fi
 
-if confirmTool "AWS cli" "to interface with AWS services"
-then
-    brew install awscli
-fi
 
 if confirmTool "Ngrok" "to expose local services to the internet"
 then
