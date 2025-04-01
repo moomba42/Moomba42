@@ -1,0 +1,47 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0",
+  "schemes" : [
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "vendorID" : "0x46d",
+          "productID" : "0xc52b",
+          "productName" : "USB Receiver"
+        }
+      },
+      "pointer" : {
+        "speed" : 0.2222,
+        "acceleration" : 0
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "vendorID" : "0x46d",
+          "productID" : "0xb023",
+          "productName" : "MX Master 3 Mac"
+        }
+      },
+      "pointer" : {
+        "speed" : 0.2222,
+        "acceleration" : 0
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "vendorID" : "0x46d",
+          "productID" : "0xc08a",
+          "productName" : "MX Vertical Advanced Ergonomic Mouse"
+        }
+      },
+      "pointer" : {
+        "speed" : 0.2222,
+        "acceleration" : 0
+      }
+    }
+  ]
+}
