@@ -42,6 +42,19 @@
         "speed" : 0.2222,
         "acceleration" : 0
       }
+    },
+    {
+      "if" : {
+        "parentApp" : "ModrinthApp",
+        "device" : {
+          "category" : "mouse"
+        }
+      },
+      "scrolling" : {
+        "reverse" : {
+          "horizontal" : true
+        }
+      }
     }
   ]
 }
