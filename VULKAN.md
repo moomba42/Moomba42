@@ -36,3 +36,17 @@ And @ratchetfreak:
 Source:
 - https://www.reddit.com/r/vulkan/comments/kjzkqi/what_is_the_reason_we_reference_render_pass_in/
 - https://github.com/KhronosGroup/Vulkan-Docs/issues/1147#issuecomment-572580007
+
+## Some excerpts about efficiency
+Taken from https://zeux.io/2020/02/27/writing-an-efficient-vulkan-renderer/
+
+#### Choosing appropriate descriptor types
+> Uniform buffers have a limit on the maximum addressable size – on desktop hardware, you get up to 64 KB of data, however on mobile hardware some GPUs only provide 16 KB of data (which is also the guaranteed minimum by the specification).
+
+> Prefer uniform buffers for small to medium sized data especially if the access pattern is fixed (e.g. for a buffer with material or scene constants). Storage buffers are more appropriate when you need large arrays of data that need to be larger than the uniform buffer limit and are indexed dynamically in the shader.
+
+#### Frequency-based descriptor sets
+> A more Vulkan centric renderer would organize data that the shaders need to access into groups by frequency of change, and use individual sets for individual frequencies, with set=0 representing least frequent change, and set=3 representing most frequent. For example, a typical setup would involve:
+> - Set=0 descriptor set containing uniform buffer with global, per-frame or per-view data, as well > as globally available textures such as shadow map texture array/atlas
+> - Set=1 descriptor set containing uniform buffer and texture descriptors for per-material data, > such as albedo map, Fresnel coefficients, etc.
+> - Set=2 descriptor set containing dynamic uniform buffer with per-draw data, such as world > transform array
