@@ -14,3 +14,7 @@ When to use exceptions instead:
 - When addressing issues that might occur and that we cannot recover from
 
 Quite often code can be restructured in such a way that we don't need to use asserts or exceptions.
+
+## General
+### Method overloading
+If a method is overloaded then every variant of the method should do the **exact** same thing. If a method does something slightly differently it has to have a different name.
