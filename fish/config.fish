@@ -1,6 +1,6 @@
+set PATH /opt/homebrew/bin /opt/homebrew/sbin $PATH /opt/homebrew/opt/llvm/bin
 set PATH $PATH $HOME/.bun/bin 
 set PATH $PATH $HOME/.pub-cache/bin 
-set PATH $PATH /opt/homebrew/bin /opt/homebrew/opt/llvm/bin
 set PATH $PATH $HOME/Development/jextract-22/bin 
 
 set DOCKER_HOST unix:///$HOME/.colima/default/docker.sock
