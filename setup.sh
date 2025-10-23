@@ -40,12 +40,8 @@ then
     echo "🔸 brew command could not be found"
     echo "✨ Installing homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # M1
     (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile  
     eval "$(/opt/homebrew/bin/brew shellenv)"
-    # Intel
-    # (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> ~/.zprofile  
-    # eval "$(/usr/local/bin/brew shellenv)"
     echo " "
 fi
 
@@ -61,18 +57,12 @@ then
     echo "🔸 fish command could not be found"
     echo "✨ Installing fish..."
     brew install fish
-    # M1
     echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
-    # Intel
-    # echo /usr/local/bin/fish | sudo tee -a /etc/shells
     ditto ./fish ~/.config/fish/
 fi
 if confirmTool "fish shell as the default shell"
 then
-    # M1
     chsh -s /opt/homebrew/bin/fish
-    # Intel
-    # chsh -s /usr/local/bin/fish
 fi
 
 if confirmTool "Amazon Corretto OpenJDK"
@@ -106,15 +96,9 @@ then
     touch ~/.zshrc
     touch ~/.zshenv
 
-    # M1
     echo "export NVM_DIR=\"\$HOME/.nvm\"" >> ~/.zshrc
     echo "[ -s \"/opt/homebrew/opt/nvm/nvm.sh\" ] && \. \"/opt/homebrew/opt/nvm/nvm.sh\"  # This loads nvm" >> ~/.zshrc
     echo "[ -s \"/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm\" ] && \. \"/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm\"  # This loads nvm bash_completion" >> ~/.zshrc
-
-    # Intel
-    # echo "export NVM_DIR=\"\$HOME/.nvm\"" >> ~/.zshrc
-    # echo "[ -s \"/usr/local/opt/nvm/nvm.sh\" ] && \. \"/usr/local/opt/nvm/nvm.sh\"  # This loads nvm" >> ~/.zshrc
-    # echo "[ -s \"/usr/local/opt/nvm/etc/bash_completion.d/nvm\" ] && \. \"/usr/local/opt/nvm/etc/bash_completion.d/nvm\"  # This loads nvm bash_completion" >> ~/.zshrc
 
     source ~/.zshenv
     source ~/.zshrc
@@ -131,8 +115,8 @@ fi
 
 if confirmTool "ssh key" "in the ~/.ssh/ directory"
 then
-    ssh-keygen -t rsa
-    echo "Use the following command to copy your ssh key: \"pbcopy < ~/.ssh/id_rsa.pub\""
+    ssh-keygen -t ed25519
+    echo "Use the following command to copy your ssh key: \"pbcopy < ~/.ssh/id_ed25519.pub\""
 fi
 
 
@@ -141,31 +125,15 @@ then
     brew install docker
     brew install docker-compose
     brew install stern
-
-    # M1
     brew install colima
-    colima start -m 4 # start colima with 4 gigabytes of ram
-    # `colima template` -> edit the startup template and change the amount of memory to 4 gigabytes, then :wq to save , and now you can just write `colima start`
-    # Intel
-    # brew install hyperkit 
+    colima start --network-address --cpu 2 --memory 16 # start colima with 16 gigabytes of ram
+    # `colima template` -> edit the startup template and change the amount of memory to 16 gigabytes, then :wq to save , and now you can just write `colima start`
 
-    brew install minikube
-    minikube config set driver docker
-    minikube start
-
-    eval $(minikube docker-env)
-    echo "$(minikube ip) docker.local" | sudo tee -a /etc/hosts > /dev/null
-    
-    # M1
     # Compose is now a Docker plugin. For Docker to find this plugin, symlink it:
     mkdir -p ~/.docker/cli-plugins
     ln -sfn /opt/homebrew/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
-    # Intel
-    # mkdir -p ~/.docker/cli-plugins
-    # ln -sfn /usr/local/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
 
     docker run hello-world
-
 
     brew install docker-credential-helper
     brew install jq
@@ -238,6 +206,12 @@ fi
 if confirmTool "Ngrok" "to expose local services to the internet"
 then
     brew install ngrok/ngrok/ngrok
+fi
+
+
+if confirmTool "Ghostty" "to have a nicer terminal"
+then
+    brew install --cask ghostty
 fi
 
 ## Better display: https://github.com/waydabber/BetterDisplay
