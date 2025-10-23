@@ -162,6 +162,7 @@ fi
 
 if confirmTool "1password" "to manage your passwords in the command line"
 then
+    brew install 1password
     brew install 1password-cli
 fi
 
