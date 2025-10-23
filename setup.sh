@@ -124,6 +124,7 @@ if confirmTool "docker + k8s"
 then
     brew install docker
     brew install docker-compose
+    brew install docker-buildx
     brew install stern
     brew install colima
     colima start --network-address --cpu 2 --memory 16 # start colima with 16 gigabytes of ram
@@ -138,7 +139,9 @@ then
     brew install docker-credential-helper
     brew install jq
     touch ~/.docker/config.json
-    jq '. += {credsStore: "osxkeychain"}' ~/.docker/config.json > ~/.docker/config.json.tmp && mv ~/.docker/config.json.tmp ~/.docker/config.json
+    jq '. += {credsStore: "osxkeychain"}' ~/.docker/config.json > ~/.docker/config.json.tmp
+    jq '. += {cliPluginsExtraDirs: ["/opt/homebrew/lib/docker/cli-plugins"]}' ~/.docker/config.json > ~/.docker/config.json.tmp
+    mv ~/.docker/config.json.tmp ~/.docker/config.json
 fi
 
 if confirmTool "flutter" "to develop cross-platform apps"
