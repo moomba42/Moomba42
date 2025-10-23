@@ -1,0 +1,78 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /Users/adlugosz/Library/Application Support/com.mitchellh.ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+# # All of these are identical:
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+# Style
+font-thicken=1
+window-padding-x = 8
+window-padding-y = 4,4
+macos-titlebar-style = native
+# macos-icon = retro
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = #00FF00
+macos-icon-screen-color = #00FF00
+
+# Theme
+palette = 0=#373737
+palette = 1=#cf3827
+palette = 2=#37d937
+palette = 3=#cccc37
+palette = 4=#5f41e8
+palette = 5=#e537e5
+palette = 6=#42d0db
+palette = 7=#f2f2f2
+palette = 8=#9b9b9b
+palette = 9=#ff3320
+palette = 10=#37ff37
+palette = 11=#ffff37
+palette = 12=#6441ff
+palette = 13=#ff37ff
+palette = 14=#43f5f5
+palette = 15=#ffffff
+background = #1f1e1e
+foreground = #FFFFFF
+cursor-color = #8B8B8B
+cursor-text = #000000
+selection-background = #314F78
+selection-foreground = #FFFFFF

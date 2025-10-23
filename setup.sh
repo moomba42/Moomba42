@@ -212,6 +212,7 @@ fi
 if confirmTool "Ghostty" "to have a nicer terminal"
 then
     brew install --cask ghostty
+    ditto ./ghostty_config "~/Application Support/com.mitchellh.ghostty/ghostty"
 fi
 
 ## Better display: https://github.com/waydabber/BetterDisplay
