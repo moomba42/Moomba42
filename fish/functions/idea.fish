@@ -1,5 +1,5 @@
 function idea
-    if test -f ~/Library/Application\ Support/JetBrains/Toolbox/scripts/ideaa
+    if test -f ~/Library/Application\ Support/JetBrains/Toolbox/scripts/idea
         ~/Library/Application\ Support/JetBrains/Toolbox/scripts/idea $argv
     else
         echo "Jetbrains Toolbox shell script generation is not configured."
